@@ -5,7 +5,7 @@ const { Search } = Input
 export default function AddTask({setTaskList}) {
     const [task, setTask] = useState('')
     const addTask= () => {
-    fetch("https://three-do-api-cp.web.app/tasks", {
+    fetch("https://three-do-api-cp.web.app/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -21,6 +21,7 @@ export default function AddTask({setTaskList}) {
         .catch(console.error)
     }
     return (
+        <div className="add-task">
              <Search 
                 value={task}
                 onChange = {e => setTask(e.target.value)}
@@ -28,5 +29,6 @@ export default function AddTask({setTaskList}) {
                 size = "Large"
                 onSearch = {addTask}
             />
+        </div>
     )
 }
