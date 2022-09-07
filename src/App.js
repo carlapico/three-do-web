@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import ToDoList from './components/ToDoList';
 import AddTask from './components/AddTask';
+import SignUp from './components/SignUp';
 import './App.css';
 
 const { Header, Content, Footer} = Layout
 
 function App() {
   const [taskList, setTaskList] = useState()
+  const [token, setToken] = useState()
   return (
     <>
       <Layout className="layout">
@@ -31,6 +33,7 @@ function App() {
           <h1>Three-do</h1>
           <ToDoList taskList={taskList} setTaskList={setTaskList} />
           <AddTask setTaskList={setTaskList} />
+          {!token && <SignUp setToken={setToken} />}
         </div>
       </Content>
       <Footer

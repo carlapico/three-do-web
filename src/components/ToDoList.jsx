@@ -2,13 +2,17 @@ import { useEffect, useState } from "react"
 import { List, Switch, Alert } from "antd"
 import ToDoListCard from "./ToDoListCard"
 
-export default function ToDoList({ taskList, setTaskList }) {
+export default function ToDoList({ taskList, setTaskList, token }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState()
 
     // call api and use setTaskList to fill in state...
   useEffect(() => {
-    fetch("https://three-do-api-cp.web.app/tasks")
+    fetch("https://three-do-api-cp.web.app/tasks", {
+        headers:{
+            "Authorization": token, // we are passing the credentials here. 
+        }
+    })
       .then((results) => results.json())
       .then(
         (tasks) => {
@@ -20,7 +24,7 @@ export default function ToDoList({ taskList, setTaskList }) {
         setError(err.message);
         setLoading(false);
       })
-  }, [setTaskList,setLoading, setError])
+  }, [token, setTaskList,setLoading, setError])
 
 //   if (!taskList) {
 //     return <h2>No tasks to complete!</h2>

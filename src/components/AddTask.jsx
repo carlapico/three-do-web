@@ -2,13 +2,16 @@ import { Input } from "antd";
 import { useState } from "react";
 const { Search } = Input
 
-export default function AddTask({setTaskList}) {
+export default function AddTask({setTaskList, token}) {
     const [task, setTask] = useState('')
     const addTask= () => {
-    fetch("https://three-do-api-cp.web.app/", {
+    // fetch("https://three-do-api-cp.web.app/", {
+    fetch("http://localhost:5555/tasks", {
         method: "POST",
+        mode: "cors",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json", 
+            "Authorization": token, 
         }, 
         body: JSON.stringify({ task, done:false })
     })
